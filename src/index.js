@@ -1,4 +1,5 @@
 import robotsTxtParser from "../controllers/robotsTxtParser.js";
+import fetchSitemap from "../controllers/fetchSiteMap.js";
 const url = 'https://plumgoodness.com'
-
-console.log(await robotsTxtParser(url))
+const siteMapUrl = await robotsTxtParser(url);
+console.log(await fetchSitemap(siteMapUrl))
