@@ -1,4 +1,5 @@
 import fetchSitemap from "./fetchSiteMap.js";
+import generateAiSummary from "./generateAiSummary.js";
 import parseSitemap from "./parseSiteMap.js";
 
 const extractProductInfo = async (productSitemapUrl) => {
@@ -15,7 +16,16 @@ const extractProductInfo = async (productSitemapUrl) => {
             return { loc, images }
         })
 
-        return JSON.stringify(products.slice(0, 5), null, 2);
+        const firstFiveProd = await Promise.all(
+            products.slice(1, 6).map(async prod=>{
+            const summary = await generateAiSummary(prod.loc)
+            return {
+                url: prod.loc,
+                images: prod.images,
+                summary: summary
+            }
+        }));
+        return JSON.stringify(firstFiveProd, null, 2);
     } catch (error) {
         return error
     }

@@ -8,7 +8,7 @@ export async function getGroqChatCompletion(text) {
         messages: [
             {
                 role: "user",
-                content: `Read the text provided below and generate a summary of 5 points about the products information and each point should have at most 10 words ${text}`,
+                content: `Read the text provided below and generate the summary in 5 bullet points briefly. ${text}`,
             },
         ],
         model: "llama3-8b-8192",
